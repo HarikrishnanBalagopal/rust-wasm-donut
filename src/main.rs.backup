@@ -1,0 +1,55 @@
+fn get_circle(radius: i32) -> String {
+    let n: i32 = radius + 1;
+    let mut s = String::new();
+    for y in -n..n {
+        for x1 in -2 * n..2 * n {
+            let x = x1 / 2;
+            s += if x * x + y * y >= (radius - 1) * (radius - 1) && x * x + y * y <= radius * radius
+            {
+                "*"
+            } else {
+                " "
+            }
+        }
+        s += "\n";
+    }
+    return s;
+}
+
+const N: usize = 10;
+const SIZE: usize = 2 * N + 1;
+type Arr = [[i32; SIZE]; SIZE];
+
+fn fill_arr2d(xss: &mut Arr) {
+    for r in 0..SIZE {
+        let y = r as i64 - N as i64;
+        for c in 0..SIZE {
+            let x = c as i64 - N as i64;
+            if x * x + y * y <= 64 {
+                xss[r][c] = 1;
+            }
+        }
+    }
+}
+
+fn print_arr2d(xss: &Arr) {
+    for xs in xss {
+        for x in xs {
+            print!("{x} ");
+        }
+        println!();
+    }
+}
+
+fn main() {
+    let radius = 10;
+    let circle = get_circle(radius);
+    println!("{circle}");
+    println!("-------------------");
+    let mut xss = [[0; 2 * N + 1]; 2 * N + 1];
+    print_arr2d(&xss);
+    println!("-------------------");
+    fill_arr2d(&mut xss);
+    print_arr2d(&xss);
+    println!("-------------------");
+}
