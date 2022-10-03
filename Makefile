@@ -20,7 +20,7 @@ build-wasm-prod:
 	cargo build --lib --release --target wasm32-unknown-unknown
 
 copy:
-	cp target/wasm32-unknown-unknown/release/hello_rust.wasm www/assets/wasm/
+	cp target/wasm32-unknown-unknown/release/hello_rust.wasm docs/assets/wasm/
 
 serve:
 	cd www && python3 -m http.server 8080
